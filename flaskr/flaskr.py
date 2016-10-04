@@ -82,13 +82,11 @@ def close_db(error):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    flash('abc')
-    print "abcdefg"
-    if request.method == 'POST':
-        print "hello"
-        print request.form
-        flash('abc')
     db = get_db()
+    if request.method == 'POST':
+    	print request.form
+        flash(request.form)
+        return redirect(url_for('index'))
     cur = db.execute('select price from entries order by id desc')
     entries = cur.fetchall()
     return render_template('index.html', entries=entries)
@@ -102,7 +100,7 @@ def add_entry():
     db.execute('insert into entries (price) values (?)',
                [request.form['price']])
     db.commit()
-    flash('New entry was successfully posted')
+    flash(request.form)
     return redirect(url_for('show_entries'))
 
 
