@@ -63,7 +63,7 @@
                 <form action="{{ url_for('index') }}" method = "POST" role = "form">
                     <div class="form-group">
                 	   <label>Amount Input</label>
-                	   <input type="integer" class="form-control" name="test">
+                	   <input type="integer" class="form-control" name="amount">
                         <button type="submit" class="btn btn-default">Submit</button>
                     </div>
                 </form>
@@ -117,7 +117,7 @@
                                             </thead>
                                             <tbody>
                                             <ul class="entries">
-                                                {% for entry in entries %}
+                                                {% for entry in orders %}
                                                        <tr><td>{{entry.id}}</td><td>{{entry.ext}}</td><td>{{entry.amount|safe}}</td><td>{{entry.price|safe}}</td></tr>
                                                 {% endfor %}
                                             </ul>
