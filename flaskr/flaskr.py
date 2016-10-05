@@ -15,15 +15,14 @@ from sqlite3 import dbapi2 as sqlite3
 from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 from flask_bootstrap import Bootstrap
-#import config    
 
 
-# create our little application :)
 def create_app():
-	app = Flask(__name__)
-	Bootstrap(app)
-	app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
-	return app
+    """ create our little application :)"""
+    app = Flask(__name__)
+    Bootstrap(app)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
+    return app
 
 app = create_app()
 
@@ -55,15 +54,10 @@ def init_db():
 def initdb_command():
     """Creates the database tables."""
     init_db()
-    print('Initialized the database.')
-    rv = connect_db()
-    cur = rv.cursor()
-    rv.commit()
-   	 
+    print 'Initialized the database.'
+
 def get_db():
-    """Opens a new database connection if there is none yet for the
-    current application context.
-    """
+    """Get the database."""
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = connect_db()
     return g.sqlite_db
@@ -78,14 +72,12 @@ def close_db(error):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """index"""
     db = get_db()
-    if request.method == 'POST':    
-    	db.execute('insert into entries(amount, price) values (?, ?)', [request.form['test'], 100])
-    	db.commit()
+    if request.method == 'POST': 
+        db.execute('insert into entries(amount, price) values (?, ?)', [request.form['test'], 100])
+        db.commit()
         return redirect(url_for('index'))
     cur = db.execute('select id, ext, amount, price from entries order by id desc')
     entries = cur.fetchall()
     return render_template('index.html', entries=entries)
-
-
-

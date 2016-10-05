@@ -43,7 +43,7 @@
         <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
             <div class="navbar-header">
                 
-                <a class="navbar-brand" href="file:///C:/Users/uestc/Documents/CU/ASE/JPMorgan/flaskr/flask_test/flaskr/templates/index.html">Swagger Trade</a>
+                <a class="navbar-brand" href="/templates/index.html">Swagger Trade</a>
             </div>
             <!-- /.navbar-header -->
 
@@ -54,9 +54,6 @@
             <!-- /.navbar-static-side -->
         </nav>
 
-          {% for message in get_flashed_messages() %}
-            <div class="flash">{{ message }}</div>
-          {% endfor %}
 
         <div id="page-wrapper" style="min-height: 890px;">
             <div class="row">
@@ -93,17 +90,14 @@
                                         Actions
                                         <span class="caret"></span>
                                     </button>
-                                    <ul class="dropdown-menu pull-right" role="menu">
-                                        <li><a href="file:///C:/Users/uestc/Documents/CU/ASE/JPMorgan/flaskr/flask_test/flaskr/static/pages/index.html#">Action</a>
-                                        </li>
-                                        <li><a href="file:///C:/Users/uestc/Documents/CU/ASE/JPMorgan/flaskr/flask_test/flaskr/static/pages/index.html#">Another action</a>
-                                        </li>
-                                        <li><a href="file:///C:/Users/uestc/Documents/CU/ASE/JPMorgan/flaskr/flask_test/flaskr/static/pages/index.html#">Something else here</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a href="file:///C:/Users/uestc/Documents/CU/ASE/JPMorgan/flaskr/flask_test/flaskr/static/pages/index.html#">Separated link</a>
-                                        </li>
-                                    </ul>
+                                    
+                                        <ul class="dropdown-menu pull-right" role="menu">
+
+                                            <li><a href="/">order by amount</a>
+                                            </li>
+                                            
+                                        </ul>
+                                    
                                 </div>
                             </div>
                         </div>
