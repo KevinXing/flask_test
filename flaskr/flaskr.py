@@ -11,23 +11,23 @@
 """
 
 import os
-from flask import Flask, request, session, redirect, url_for, abort, \
-     render_template, flash
+from flask import Flask, request, session, redirect, url_for, \
+     render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_bootstrap import Bootstrap
 
 
 def create_app():
     """ create our little application :)"""
-    app = Flask(__name__)
-    Bootstrap(app)
-    return app
+    myapp = Flask(__name__)
+    Bootstrap(myapp)
+    return myapp
 
 app = create_app()
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///orders.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 
-db=SQLAlchemy(app)
+db = SQLAlchemy(app)
 
 from models import *
 
@@ -45,12 +45,11 @@ app.config.from_envvar('FLASKR_SETTINGS', silent=True)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    """ index """
     if request.method == 'POST':
-        q = request.form['amount']
         db.session.add(ETFOrder(request.form['amount'], 100))
         db.session.commit()
         return redirect(url_for('index'))
-    #cur = db.session.execute('select id, ext, amount, price from orders order by id desc')
     cur = db.session.execute('select id, ext, amount, price from orders order by id desc')
     orders = cur.fetchall()
-    return render_template('index.html', orders = orders)
+    return render_template('index.html', orders=orders)
